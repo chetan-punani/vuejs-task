@@ -5,7 +5,7 @@ Add background color to the table of selected color option</h2>
   <div class="dropdown">
     <label for="cars">Select BackGround-Color For Table :  </label>
     <select v-model="colorselect">
-    <option value=" ">Choose a color</option>  
+    <option value="default">Choose a color</option>  
     <option value="yellow">Yellow</option>
     <option value="pink">Pink</option>
     <option value="blue">Blue</option>
@@ -24,7 +24,7 @@ Add background color to the table of selected color option</h2>
         <th :colspan="sizeColspan()">Topic Covered</th>
       </tr>
 
-      <tr v-for="trainee in trainees" :key="trainee.date">
+      <tr v-for="(trainee, index) in trainees" :key="index">
         <td>{{trainee.date}}</td>
         <td>{{trainee.day}}</td>
         <td>{{trainee.section}}</td>
@@ -34,7 +34,7 @@ Add background color to the table of selected color option</h2>
             <div class="progress-bar" role="progressbar" :style="{width: trainee.progress}" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </td>
-        <td v-for="topic in trainee.topics" :key="topic.topics" >{{topic}}</td>
+        <td v-for="(topic, index) in trainee.topics" :key="index" >{{topic}}</td>
       </tr>
     </table>
   </div>
@@ -46,7 +46,7 @@ Add background color to the table of selected color option</h2>
 export default {
   data() {
     return {
-        colorselect : '',
+        colorselect : 'default',
        trainees : [{
            date: '14-02-2022',
            day : 'Monday',
@@ -84,7 +84,7 @@ export default {
       } else if(this.colorselect === 'blue') {
         return '#0066FF';
       } else if(this.colorselect === 'red') {
-        return '#FF3300';
+        return '#FF0000';
       }
     }
   },
