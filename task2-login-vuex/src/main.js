@@ -6,12 +6,14 @@ import store from './store/index.js';
 
 import BaseButton from "./components/ui/BaseButton.vue";
 import LoginPage from  './components/modules/LoginPage.vue';
+import SignUp from "./components/modules/SignUp.vue";
 import HomePage from './components/modules/HomePage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path:'/', redirect:'/login' },
+        { path:'/', redirect:'/signup' },
+        { path:'/signup', component: SignUp },
         { path:'/login', component: LoginPage },
         { path:'/home', component: HomePage },
     ],

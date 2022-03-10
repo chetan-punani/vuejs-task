@@ -1,10 +1,7 @@
 export default {
-    login(context) {
-        context.commit('setAuthentication', {auth: true });
-    },
-    logout(context) {
-        context.commit('setAuthentication', {auth: false });
-    },
+    login(context, payload) {
+        context.commit('login', payload);
+    },  
     setLoginUser(context, payload) {
         context.commit('setLoginUser', payload);
     },

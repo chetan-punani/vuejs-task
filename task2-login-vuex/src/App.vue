@@ -4,8 +4,6 @@
   </section>
 </template>
 
-
-
 <style>
 * {
   box-sizing: border-box;
@@ -23,5 +21,4 @@ body {
   padding: 1rem;
   text-align: center;
 }
-
 </style>

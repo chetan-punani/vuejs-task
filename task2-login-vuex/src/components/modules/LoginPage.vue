@@ -16,8 +16,7 @@
     </div>
 
     <div class="form-layout">
-        <base-button @click="authUser" >Login</base-button>
-        <base-button @click="addUser" >SignUp</base-button>
+      <base-button @click="authUser">Login</base-button>
     </div>
     <!-- </form> -->
   </section>
@@ -31,52 +30,53 @@ export default {
       password: "",
     };
   },
-  computed: {
-    isAuth() {
-      return this.$store.getters["login/usersAuthenticated"];
-    },
-  },
   methods: {
     authUser() {
-      const userData = this.$store.getters["login/users"];
+      const userPassword = sessionStorage.getItem(this.email);
 
-      userData.forEach((element) => {
-        if (element.email === this.email) {
-          if (element.password === this.password) {
-            // ..
-            this.$store.dispatch("login/login");
+      if (this.email !== "" && this.password !== "") {
+        console.log(userPassword);
+        if (userPassword === null) {
+          alert("No email address exit, Go to Signup");
+          this.$router.push("/");
+        } else {
+          if (userPassword === this.password) {
             this.$store.dispatch("login/setLoginUser", {
-                userName: this.email 
+              userName: this.email,
             });
             this.$router.push("/home");
           } else {
-            // ..
-            alert("Password Does not match...");
+            alert("password is wrong!!!");
           }
         }
-      });
-        this.clearField();
-      // const checLogin = this.$store.getters['login/usersLoggedIn'];
-      //         if(checLogin === true) {
-      //             // ..
-      //         } else {
-      //             alert (" User Not Found Go For SignUp...");
-      //         }
-    },
-    addUser() {
-      this.$store.dispatch("login/addNewUser", {
-        user: {
-          email: this.email,
-          password: this.password,
-        },
-      });
+      } else {
+        alert("Please Enter email and password.");
+      }
+
+      // const userData = this.$store.getters["login/users"];
+
+      // userData.forEach((element) => {
+      //   if (element.email === this.email) {
+      //     if (element.password === this.password) {
+      //       // ..
+      //       sessionStorage.setItem(this.email, this.password);
+      //       this.$store.dispatch("login/login");
+      //       this.$store.dispatch("login/setLoginUser", {
+      //           userName: this.email
+      //       });
+      //       this.$router.push("/home");
+      //     } else {
+      //       // ..
+      //       alert("Password Does not match...");
+      //     }
+      //   }
+      // });
       this.clearField();
-      // console.log(this.$store.getters['login/users']);
     },
     clearField() {
-        this.email = "";
-        this.password = "";
-    }
+      this.email = "";
+      this.password = "";
+    },
   },
 };
 </script>
@@ -87,9 +87,9 @@ export default {
 }
 
 .form-layout {
-    padding-top: 5%;
-    display: flex;
-    text-align: center;
+  padding-top: 5%;
+  display: flex;
+  text-align: center;
 }
 
 .btn {
